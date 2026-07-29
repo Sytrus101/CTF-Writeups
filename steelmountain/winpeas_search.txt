@@ -1,0 +1,1184 @@
+ [!] If you want to run the file analysis checks (search sensitive information in files), you need to specify the
+'fileanalysis' or 'all' argument. Note that this search might take several minutes. For help, run winpeass.exe --help                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                                                                            
+ANSI color bit for Windows is not set. If you are executing this from a Windows terminal inside the host you should run
+ 'REG ADD HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1' and then start a new CMD
+Long paths are disabled, so the maximum length of a path supported is 260 chars (this may cause false negatives when lo
+oking for files). If you are admin, you can enable it with 'REG ADD HKLM\SYSTEM\CurrentControlSet\Control\FileSystem /v
+ VirtualTerminalLevel /t REG_DWORD /d 1' and then start a new CMD
+
+               ((((((((((((((((((((((((((((((((                                                                                                                                                                                                                                                                             
+        (((((((((((((((((((((((((((((((((((((((((((                                                                                                                                                                                                                                                                         
+      ((((((((((((((**********/##########(((((((((((((                                                                                                                                                                                                                                                                      
+    ((((((((((((********************/#######(((((((((((                                                                                                                                                                                                                                                                     
+    ((((((((******************/@@@@@/****######((((((((((                                                                                                                                                                                                                                                                   
+    ((((((********************@@@@@@@@@@/***,####((((((((((                                                                                                                                                                                                                                                                 
+    (((((********************/@@@@@%@@@@/********##(((((((((                                                                                                                                                                                                                                                                
+    (((############*********/%@@@@@@@@@/************((((((((                                                                                                                                                                                                                                                                
+    ((##################(/******/@@@@@/***************((((((                                                                                                                                                                                                                                                                
+    ((#########################(/**********************(((((                                                                                                                                                                                                                                                                
+    ((##############################(/*****************(((((                                                                                                                                                                                                                                                                
+    ((###################################(/************(((((                                                                                                                                                                                                                                                                
+    ((#######################################(*********(((((                                                                                                                                                                                                                                                                
+    ((#######(,.***.,(###################(..***.*******(((((                                                                                                                                                                                                                                                                
+    ((#######*(#####((##################((######/(*****(((((                                                                                                                                                                                                                                                                
+    ((###################(/***********(##############()(((((                                                                                                                                                                                                                                                                
+    (((#####################/*******(################)((((((                                                                                                                                                                                                                                                                
+    ((((############################################)((((((                                                                                                                                                                                                                                                                 
+    (((((##########################################)(((((((                                                                                                                                                                                                                                                                 
+    ((((((########################################)(((((((                                                                                                                                                                                                                                                                  
+    ((((((((####################################)((((((((                                                                                                                                                                                                                                                                   
+    (((((((((#################################)(((((((((                                                                                                                                                                                                                                                                    
+        ((((((((((##########################)(((((((((                                                                                                                                                                                                                                                                      
+              ((((((((((((((((((((((((((((((((((((((                                                                                                                                                                                                                                                                        
+                 ((((((((((((((((((((((((((((((                                                                                                                                                                                                                                                                             
+
+ADVISORY: winpeas should be used for authorized penetration testing and/or educational purposes only. Any m
+isuse of this software will not be the responsibility of the author or of any other collaborator. Use it at your own de                                                                                                                                                                                                     
+vices and/or with the device owner's permission.                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                            
+  WinPEAS-ng by @hacktricks_live                                                                                                                                                                                                                                                                                            
+
+       /---------------------------------------------------------------------------------\                                                                                                                                                                                                                                  
+       |                             Do you like PEASS?                                  |                                                                                                                                                                                                                                  
+       |---------------------------------------------------------------------------------|                                                                                                                                                                                                                                  
+       |         Linux PE & Hardening    :     https://hacktricks-training.com/courses/lhe/ |                                                                                                                                                                                                                               
+       |         Learn Cloud Hacking       :     training.hacktricks.xyz                 |                                                                                                                                                                                                                                  
+       |         Follow on Twitter         :     @hacktricks_live                        |                                                                                                                                                                                                                                  
+       |         Respect on HTB            :     SirBroccoli                             |                                                                                                                                                                                                                                  
+       |---------------------------------------------------------------------------------|                                                                                                                                                                                                                                  
+       |                                 Thank you!                                      |                                                                                                                                                                                                                                  
+       \---------------------------------------------------------------------------------/                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                            
+  [+] Legend:
+         Red                Indicates a special privilege over an object or something is misconfigured
+                                                                                                                                                                                                                                                                                                                            
+         Green              Indicates that some protection is enabled or something is well configured
+         Cyan               Indicates active users
+         Blue               Indicates disabled users
+         LightYellow        Indicates links
+
+ You can find a Windows local PE Checklist here: https://book.hacktricks.wiki/en/windows-hardening/checklist-
+windows-privilege-escalation.html                                                                                                                                                                                                                                                                                           
+ Best Linux PE & Hardening course: https://hacktricks-training.com/courses/lhe/                                                                                                                                                                                                                                             
+   Creating Dynamic lists, this could take a while, please wait...                                                                                                                                                                                                                                                          
+   - Loading sensitive_files yaml definitions file...
+  [X] Exception: An exception occured while parsing sensitive_files.yaml configuration file: Method not found: '
+!!0[] System.Array.Empty()'.                                                                                                                                                                                                                                                                                                
+Error while getting sensitive_files yaml info: System.MissingMethodException: Method not found: '!!0[] System.Ar
+ray.Empty()'.                                                                                                                                                                                                                                                                                                               
+   at System.Yaml.YamlParser.lYamlStream()                                                                                                                                                                                                                                                                                  
+   at System.Yaml.YamlParser.Parse(String yaml, YamlConfig config)                                                                                                                                                                                                                                                          
+   at System.Yaml.Serialization.YamlSerializer.Deserialize(String yaml, Type[] types)                                                                                                                                                                                                                                       
+   at winPEAS.Helpers.YamlConfig.YamlConfigHelper.GetWindowsSearchConfig()                                                                                                                                                                                                                                                  
+   at winPEAS.Checks.Checks.CreateDynamicLists(Boolean isFileSearchEnabled)                                                                                                                                                                                                                                                 
+   - Loading regexes yaml definitions file...
+  [X] Exception: An exception occurred while parsing regexes.yaml configuration file: Method not found: '!!0[] S
+ystem.Array.Empty()'.                                                                                                                                                                                                                                                                                                       
+Error while getting regexes yaml info: System.MissingMethodException: Method not found: '!!0[] System.Array.Empt
+y()'.                                                                                                                                                                                                                                                                                                                       
+   at System.Yaml.YamlParser.lYamlStream()                                                                                                                                                                                                                                                                                  
+   at System.Yaml.YamlParser.Parse(String yaml, YamlConfig config)                                                                                                                                                                                                                                                          
+   at System.Yaml.Serialization.YamlSerializer.Deserialize(String yaml, Type[] types)                                                                                                                                                                                                                                       
+   at winPEAS.Helpers.YamlConfig.YamlConfigHelper.GetRegexesSearchConfig()                                                                                                                                                                                                                                                  
+   at winPEAS.Checks.Checks.CreateDynamicLists(Boolean isFileSearchEnabled)                                                                                                                                                                                                                                                 
+   - Checking if domain...
+   - Getting Win32_UserAccount info...
+   - Creating current user groups list...
+   - Creating active users list (local only)...
+   - Creating disabled users list...
+   - Admin users list...
+   - Creating AppLocker bypass list...
+   - Creating files/directories list for search...
+
+
+????????????????????????????????????? System Information (T1082,T1068,T1548.002,T1003.001,T1003.00
+4,T1003.005,T1059.001,T1552.001,T1552.002,T1562.001,T1562.002,T1518.001,T1557.001,T1558,T1559,T1134.001,T1547.005,T1484                                                                                                                                                                                                     
+.001,T1613,T1654,T1072,T1187) ?????????????????????????????????????                                                                                                                                                                                                                                                         
+
+???????????? Basic System Information (T1082)
+? Check if the Windows versions is vulnerable to some known exploit https://book.hacktricks.wiki/e
+n/windows-hardening/windows-local-privilege-escalation/index.html#version-exploits                                                                                                                                                                                                                                          
+    OS Name: Microsoft Windows Server 2012 R2 Datacenter
+    OS Version: 6.3.9600 N/A Build 9600
+    System Type: x64-based PC
+    Hostname: steelmountain
+    ProductName: Windows Server 2012 R2 Datacenter
+    EditionID: ServerDatacenter
+    ReleaseId: 
+    BuildBranch: 
+    CurrentMajorVersionNumber: 
+    CurrentVersion: 6.3
+    Architecture: AMD64
+    ProcessorCount: 1
+    SystemLang: en-US
+    KeyboardLang: English (United States)
+    TimeZone: (UTC-08:00) Pacific Time (US & Canada)
+    IsVirtualMachine: False
+    Current Time: 7/29/2026 10:27:16 AM
+    HighIntegrity: False
+    PartOfDomain: False
+    Hotfixes: KB2919355 (3/21/2014), KB2919442 (3/21/2014), KB2937220 (3/21/2014), KB2938772 (3/21/20
+14), KB2939471 (3/21/2014), KB2949621 (3/21/2014),                                                                                                                                                                                                                                                                          
+
+
+???????????? Windows Version Vulnerabilities (T1082,T1068)
+? Product candidates: Windows Server 2012 R2 | Windows Server 2012 R2 (Server Core installation)
+? Definitions date: 20260729
+? Installed hotfixes detected: 6
+? Pre-filter matches: 803, filtered by installed/superseded KBs: 628
+Matched 175 known exploited vulnerabilities for this running Windows version.
+Matched products: Windows Server 2012 R2 | Windows Server 2012 R2 (Server Core installation)
+    CVE-2013-3893 KB2884101 [Critical] Remote Code Execution
+    CVE-2013-5045 KB2898785 [Critical] Remote Code Execution
+    CVE-2013-7331 KB2977629 [Critical] Remote Code Execution
+    CVE-2014-0307 KB2925418 [Critical] Remote Code Execution
+    CVE-2014-0322 KB2925418 [Critical] Remote Code Execution
+    CVE-2014-1776 KB2964444 [Critical] Remote Code Execution
+    CVE-2014-4113 KB3000061 [Critical] Remote Code Execution
+    CVE-2014-6321 KB2992611 [Critical] Remote Code Execution
+    CVE-2014-6332 KB3010788 [Critical] Remote Code Execution
+    CVE-2015-0010 KB3013455 [Critical] Remote Code Execution
+    CVE-2015-1635 KB3042553 [Critical] Remote Code Execution
+    CVE-2015-2426 KB3079904 [Critical] Remote Code Execution
+    CVE-2015-2433 KB3078601 [Critical] Remote Code Execution
+    CVE-2015-2455 KB3078601 [Critical] Remote Code Execution
+    CVE-2015-2456 KB3078601 [Critical] Remote Code Execution
+    CVE-2015-2458 KB3078601 [Critical] Remote Code Execution
+    CVE-2015-2459 KB3078601 [Critical] Remote Code Execution
+    CVE-2015-2460 KB3078601 [Critical] Remote Code Execution
+    CVE-2015-2462 KB3078601 [Critical] Remote Code Execution
+    CVE-2015-2463 KB3078601 [Critical] Remote Code Execution
+? Showing 20/175 results.
+? This check applies version matching with installed/superseded KB filtering.
+
+???????????? Showing All Microsoft Updates (T1082)
+  [X] Exception: Exception has been thrown by the target of an invocation.
+
+???????????? System Last Shutdown Date/time (from Registry)
+ (T1082)                                                                                                                                                                                                                                                                                                                    
+    Last Shutdown Date/time        :    10/12/2020 12:12:51 PM
+
+???????????? User Environment Variables (T1082)
+? Check for some passwords or keys in the env variables 
+    COMPUTERNAME: STEELMOUNTAIN
+    USERPROFILE: C:\Users\bill
+    HOMEPATH: \Users\bill
+    LOCALAPPDATA: C:\Users\bill\AppData\Local
+    PSModulePath: C:\Users\bill\Documents\WindowsPowerShell\Modules;C:\Program Files (x86)\WindowsPowerShell
+\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules\
+    PROCESSOR_ARCHITECTURE: AMD64
+    Path: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0
+\
+    CommonProgramFiles(x86): C:\Program Files (x86)\Common Files
+    ProgramFiles(x86): C:\Program Files (x86)
+    PROCESSOR_LEVEL: 6
+    LOGONSERVER: \\STEELMOUNTAIN
+    PATHEXT: .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+    HOMEDRIVE: C:
+    SystemRoot: C:\Windows
+    SESSIONNAME: Console
+    ALLUSERSPROFILE: C:\ProgramData
+    PUBLIC: C:\Users\Public
+    FP_NO_HOST_CHECK: NO
+    APPDATA: C:\Users\bill\AppData\Roaming
+    PROCESSOR_REVISION: 4f01
+    USERNAME: bill
+    CommonProgramW6432: C:\Program Files\Common Files
+    CommonProgramFiles: C:\Program Files\Common Files
+    OS: Windows_NT
+    USERDOMAIN_ROAMINGPROFILE: STEELMOUNTAIN
+    PROCESSOR_IDENTIFIER: Intel64 Family 6 Model 79 Stepping 1, GenuineIntel
+    ComSpec: C:\Windows\system32\cmd.exe
+    SystemDrive: C:
+    TEMP: C:\Users\bill\AppData\Local\Temp\1
+    ProgramFiles: C:\Program Files
+    NUMBER_OF_PROCESSORS: 1
+    TMP: C:\Users\bill\AppData\Local\Temp\1
+    ProgramData: C:\ProgramData
+    ProgramW6432: C:\Program Files
+    windir: C:\Windows
+    USERDOMAIN: STEELMOUNTAIN
+
+???????????? System Environment Variables (T1082)
+? Check for some passwords or keys in the env variables 
+    FP_NO_HOST_CHECK: NO
+    USERNAME: SYSTEM
+    Path: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0
+\
+    ComSpec: C:\Windows\system32\cmd.exe
+    TMP: C:\Windows\TEMP
+    OS: Windows_NT
+    windir: C:\Windows
+    PROCESSOR_ARCHITECTURE: AMD64
+    TEMP: C:\Windows\TEMP
+    PATHEXT: .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+    PSModulePath: C:\Windows\system32\WindowsPowerShell\v1.0\Modules\
+    NUMBER_OF_PROCESSORS: 1
+    PROCESSOR_LEVEL: 6
+    PROCESSOR_IDENTIFIER: Intel64 Family 6 Model 79 Stepping 1, GenuineIntel
+    PROCESSOR_REVISION: 4f01
+
+???????????? Audit Settings (T1562.002)
+? Check what is being logged 
+    Not Found
+
+???????????? Audit Policy Settings - Classic & Advanced (T1562.002)
+
+???????????? WEF Settings (T1562.002)
+? Windows Event Forwarding, is interesting to know were are sent the logs 
+    Not Found
+
+???????????? LAPS Settings (T1003.004)
+? If installed, local administrator password is changed frequently and is restricted by ACL 
+    LAPS Enabled: LAPS not installed
+
+???????????? Wdigest (T1003.001)
+? If enabled, plain-text crds could be stored in LSASS https://book.hacktricks.wiki/en/windows-har
+dening/windows-local-privilege-escalation/index.html#wdigest                                                                                                                                                                                                                                                                
+    Wdigest is not enabled
+
+???????????? LSA Protection (T1003.001)
+? If enabled, a driver is needed to read LSASS memory (If Secure Boot or UEFI, RunAsPPL cannot be disable
+d by deleting the registry key) https://book.hacktricks.wiki/en/windows-hardening/windows-local-privilege-escala                                                                                                                                                                                                            
+tion/index.html#lsa-protection                                                                                                                                                                                                                                                                                              
+    LSA Protection is not enabled
+
+???????????? Credentials Guard (T1003.001)
+? If enabled, a driver is needed to read LSASS memory https://book.hacktricks.wiki/windows-hardeni
+ng/stealing-credentials/credentials-protections#credentials-guard                                                                                                                                                                                                                                                           
+    CredentialGuard is not enabled
+  [X] Exception:   [X] 'Win32_DeviceGuard' WMI class unavailable
+
+???????????? Cached Creds (T1003.005)
+? If > 0, credentials will be cached in the registry and accessible by SYSTEM user https://book.ha
+cktricks.wiki/en/windows-hardening/windows-local-privilege-escalation/index.html#cached-credentials                                                                                                                                                                                                                         
+    cachedlogonscount is 10
+
+???????????? Enumerating saved credentials in Registry (CurrentPass) (T1552.002)
+
+???????????? AV Information (T1518.001)
+  [X] Exception: Invalid namespace 
+    No AV was detected!!
+    Not Found
+
+???????????? Windows Defender configuration (T1518.001)
+  Local Settings
+  Group Policy Settings
+
+???????????? UAC Status (T1548.002)
+? If you are in the Administrators group check how to bypass the UAC https://book.hacktricks.wiki/
+en/windows-hardening/windows-local-privilege-escalation/index.html#from-administrator-medium-to-high-integrity-level--u                                                                                                                                                                                                     
+ac-bypasss                                                                                                                                                                                                                                                                                                                  
+    ConsentPromptBehaviorAdmin: 5 - PromptForNonWindowsBinaries
+    EnableLUA: 1
+    LocalAccountTokenFilterPolicy: 
+    FilterAdministratorToken: 0
+      [*] LocalAccountTokenFilterPolicy set to 0 and FilterAdministratorToken != 1.
+      [-] Only the RID-500 local admin account can be used for lateral movement.                                                                                                                                                                                                                                            
+
+???????????? PowerShell Settings (T1059.001)
+    PowerShell v2 Version: 2.0
+    PowerShell v5 Version: 4.0
+    PowerShell Core Version: 
+    Transcription Settings: 
+    Module Logging Settings: 
+    Scriptblock Logging Settings: 
+    PS history file: 
+    PS history size: 
+
+???????????? Enumerating PowerShell Session Settings using the registry (T1059.001)
+      You must be an administrator to run this check
+
+???????????? PS default transcripts history (T1552.001)
+? Read the PS history inside these files (if any)
+
+???????????? HKCU Internet Settings (T1082)
+    User Agent: Mozilla/4.0 (compatible; MSIE 8.0; Win32)
+    IE5_UA_Backup_Flag: 5.0
+    ZonesSecurityUpgrade: System.Byte[]
+    EmailName: User@
+    AutoConfigProxy: wininet.dll
+    MimeExclusionListForCache: multipart/mixed multipart/x-mixed-replace multipart/x-byteranges
+    WarnOnPost: System.Byte[]
+    UseSchannelDirectly: System.Byte[]
+    EnableHttp1_1: 1
+    UrlEncoding: 0
+    SecureProtocols: 2720
+    PrivacyAdvanced: 0
+    DisableCachingOfSSLPages: 1
+    WarnonZoneCrossing: 1
+    CertificateRevocation: 1
+    EnableNegotiate: 1
+    MigrateProxy: 1
+    ProxyEnable: 0
+
+???????????? HKLM Internet Settings (T1082)
+    CodeBaseSearchPath: CODEBASE
+    EnablePunycode: 1
+    WarnOnIntranet: 1
+    MinorVersion: 0
+    ActiveXCache: C:\Windows\Downloaded Program Files
+
+???????????? Drives Information (T1082)
+? Remember that you should search more info inside the other drives 
+    C:\ (Type: Fixed)(Filesystem: NTFS)(Available space: 41 GB)(Permissions: Users [Allow: AppendData/Create
+Directories])                                                                                                                                                                                                                                                                                                               
+
+???????????? Checking WSUS (T1072,T1068)
+?  https://book.hacktricks.wiki/en/windows-hardening/windows-local-privilege-escalation/index.html
+#wsus                                                                                                                                                                                                                                                                                                                       
+    Not Found
+
+???????????? Checking KrbRelayUp (T1187,T1558)
+?  https://book.hacktricks.wiki/en/windows-hardening/windows-local-privilege-escalation/index.html
+#krbrelayup                                                                                                                                                                                                                                                                                                                 
+  The system isn't inside a domain, so it isn't vulnerable
+
+???????????? Checking If Inside Container (T1613)
+? If the binary cexecsvc.exe or associated service exists, you are inside Docker 
+You are NOT inside a container
+
+???????????? Checking AlwaysInstallElevated (T1548.002)
+?  https://book.hacktricks.wiki/en/windows-hardening/windows-local-privilege-escalation/index.html
+#alwaysinstallelevated                                                                                                                                                                                                                                                                                                      
+    AlwaysInstallElevated isn't available
+
+???????????? Object Manager race-window amplification primitives (T1068)
+? Project Zero write-up: https://projectzero.google/2025/12/windows-exploitation-techniques.html
+                                                                                                                                                                                                                                                                                                                            
+    Created a test named event (PEAS_OMNS_3800_f6d4e92dc68e41928d74ea0d3d4a9ec7) under \BaseNamedObjects.
+?     -> Low-privileged users can slow NtOpen*/NtCreate* lookups using ~32k-character names or ~16k-level
+ directory chains.                                                                                                                                                                                                                                                                                                          
+?     -> Point attacker-controlled symbolic links to the slow path to stretch kernel race windows.
+?     -> Use this whenever a bug follows check -> NtOpenX -> privileged action patterns.
+
+???????????? Enumerate LSA settings - auth packages included
+ (T1547.005)                                                                                                                                                                                                                                                                                                                
+    Bounds                               :       00-30-00-00-00-20-00-00
+    auditbasedirectories                 :       0
+    fullprivilegeauditing                :       00
+    crashonauditfail                     :       0
+    auditbaseobjects                     :       0
+    Security Packages                    :       ""
+    LimitBlankPasswordUse                :       1
+    NoLmHash                             :       1
+    Notification Packages                :       rassfm,scecli
+    Authentication Packages              :       msv1_0
+    LsaPid                               :       648
+    SecureBoot                           :       1
+    ProductType                          :       8
+    disabledomaincreds                   :       0
+    everyoneincludesanonymous            :       0
+    forceguest                           :       0
+    restrictanonymous                    :       0
+    restrictanonymoussam                 :       1
+
+???????????? Enumerating NTLM Settings (T1557.001)
+  LanmanCompatibilityLevel    :  (Send NTLMv2 response only - Win7+ default)
+                                                                                                                                                                                                                                                                                                                            
+
+  NTLM Signing Settings                                                                                                                                                                                                                                                                                                     
+      ClientRequireSigning    : False
+      ClientNegotiateSigning  : True
+      ServerRequireSigning    : False
+      ServerNegotiateSigning  : False
+      LdapSigning             : Negotiate signing (Negotiate signing
+)
+
+  Session Security                                                                                                                                                                                                                                                                                                          
+      NTLMMinClientSec        : 536870912 (Require 128-bit encryption)
+      NTLMMinServerSec        : 536870912 (Require 128-bit encryption)
+                                                                                                                                                                                                                                                                                                                            
+
+  NTLM Auditing and Restrictions                                                                                                                                                                                                                                                                                            
+      InboundRestrictions     :  (Not defined)
+      OutboundRestrictions    :  (Not defined)
+      InboundAuditing         :  (Not defined)
+      OutboundExceptions      :
+
+???????????? Display Local Group Policy settings - local users/machine (T1082)
+
+???????????? Potential GPO abuse vectors (applied domain GPOs writable by current user) (T1484.001
+)                                                                                                                                                                                                                                                                                                                           
+    Host is not joined to a domain or domain info is unavailable.
+
+???????????? Checking AppLocker effective policy
+   AppLockerPolicy version: 1
+   listing rules:
+
+
+
+???????????? PrintNightmare PointAndPrint Policies (T1068)
+? Check PointAndPrint policy hardening https://itm4n.github.io/printnightmare-exploitation/
+    Not Found
+
+???????????? Enumerating Printers (WMI) (T1082)
+      Name:                    Microsoft XPS Document Writer
+      Status:                  Unknown
+      Sddl:                    O:SYD:(A;OIIO;GA;;;CO)(A;OIIO;GA;;;AC)(A;;SWRC;;;WD)(A;CIIO;GX;;;WD)(A;;SWRC;;;AC)(A;CII
+O;GX;;;AC)(A;;LCSWDTSDRCWDWO;;;BA)(A;OICIIO;GA;;;BA)
+      Is default:              True
+      Is network printer:      False
+
+   =================================================================================================
+
+
+???????????? Enumerating Named Pipes (T1559)
+  Name                                                                                                 CurrentUserPerms
+                                                       Sddl
+
+  datastate_{CBADF67E-A2FC-4CB1-832B-B8CA731D66A3}\BPSvc8                                              Every
+one [Allow: AllAccess]                                            O:BAG:SY                                                                                                                                                                                                                                                  
+
+  datastate_{CBADF67E-A2FC-4CB1-832B-B8CA731D66A3}\BPSvc9                                              Every
+one [Allow: AllAccess]                                            O:BAG:SY                                                                                                                                                                                                                                                  
+
+  datastate_ProgramDeactivator_DisableRuningProgram_V9                                                 Every
+one [Allow: AllAccess]                                            O:BAG:SY                                                                                                                                                                                                                                                  
+
+  datastate_ProgramDeactivator_PIPE_NAME_V9                                                            Every
+one [Allow: AllAccess]                                            O:BAG:SY                                                                                                                                                                                                                                                  
+
+  eventlog                                                                                             Every
+one [Allow: WriteData/CreateFiles]                                O:LSG:LSD:P(A;;0x12019b;;;WD)(A;;CC;;;OW)(A;;0x12                                                                                                                                                                                                         
+008f;;;S-1-5-80-880578595-1860270145-482643319-2788375705-1540778122)
+
+
+???????????? Named Pipes with Low-Priv Write Access to Privileged Servers (T1134.001,T1559)
+
+      No risky named pipe ACLs were found.
+
+
+???????????? Enumerating AMSI registered providers (T1562.001)
+
+???????????? Enumerating Sysmon configuration (T1518.001)
+      You must be an administrator to run this check
+
+???????????? Enumerating Sysmon process creation logs (1) (T1654)
+      You must be an administrator to run this check
+
+???????????? Installed .NET versions
+ (T1082)                                                                                                                                                                                                                                                                                                                    
+  CLR Versions
+   4.0.30319
+
+  .NET Versions                                                                                                                                                                                                                                                                                                             
+   4.5.51641
+
+  .NET & AMSI (Anti-Malware Scan Interface) support                                                                                                                                                                                                                                                                         
+      .NET version supports AMSI     : False
+      OS supports AMSI               : False
+
+
+????????????????????????????????????? Interesting Events information (T1654,T1078,T1078.003,T1552.
+001,T1059.001,T1082) ?????????????????????????????????????                                                                                                                                                                                                                                                                  
+
+???????????? Printing Explicit Credential Events (4648) for last 30 days - A process logged on using plai
+ntext credentials                                                                                                                                                                                                                                                                                                           
+ (T1078.003)                                                                                                                                                                                                                                                                                                                
+      You must be an administrator to run this check
+
+???????????? Printing Account Logon Events (4624) for the last 10 days.
+ (T1654,T1078)                                                                                                                                                                                                                                                                                                              
+      You must be an administrator to run this check
+
+???????????? Process creation events - searching logs (EID 4688) for sensitive data.
+ (T1654)                                                                                                                                                                                                                                                                                                                    
+      You must be an administrator to run this check
+
+???????????? PowerShell events - script block logs (EID 4104) - searching for sensitive data.
+ (T1552.001,T1059.001)                                                                                                                                                                                                                                                                                                      
+
+???????????? Displaying Power off/on events for last 5 days
+ (T1082)                                                                                                                                                                                                                                                                                                                    
+  7/29/2026 9:33:27 AM    :  Startup
+
+
+????????????????????????????????????? Users Information (T1087.001,T1087.004,T1033,T1134.001,T1115
+,T1563.002,T1083,T1552.002,T1201) ?????????????????????????????????????                                                                                                                                                                                                                                                     
+
+???????????? Users (T1087.001)
+? Check if you have some admin equivalent privileges https://book.hacktricks.wiki/en/windows-harde
+ning/windows-local-privilege-escalation/index.html#users--groups                                                                                                                                                                                                                                                            
+  Current user: bill
+  Current groups: Domain Users, Everyone, Users, Interactive, Console Logon, Authenticated Users, This Organization, Lo
+cal account, Local, NTLM Authentication
+   =================================================================================================
+
+    STEELMOUNTAIN\Administrator: Built-in account for administering the computer/domain
+        |->Groups: Administrators
+        |->Password: CanChange-Expi-Req
+
+    STEELMOUNTAIN\bill
+        |->Groups: Users
+        |->Password: CanChange-NotExpi-Req
+
+    STEELMOUNTAIN\Guest(Disabled): Built-in account for guest access to the co
+mputer/domain
+        |->Groups: Guests
+        |->Password: NotChange-NotExpi-NotReq
+
+
+???????????? Current User Idle Time (T1033)
+   Current User   :     STEELMOUNTAIN\bill
+   Idle Time      :     00h:53m:53s:125ms
+
+???????????? Display Tenant information (DsRegCmd.exe /status) (T1087.004)
+
+???????????? Current Token privileges (T1134.001)
+? Check if you can escalate privilege using some enabled token https://book.hacktricks.wiki/en/win
+dows-hardening/windows-local-privilege-escalation/index.html#token-manipulation                                                                                                                                                                                                                                             
+    SeChangeNotifyPrivilege: SE_PRIVILEGE_ENABLED_BY_DEFAULT, SE_PRIVILEGE_ENABLED
+    SeIncreaseWorkingSetPrivilege: DISABLED
+
+???????????? Clipboard text (T1115)
+
+???????????? Logged users (T1033)
+    STEELMOUNTAIN\bill
+
+???????????? Display information about local users (T1087.001)
+   Computer Name           :   STEELMOUNTAIN
+   User Name               :   Administrator
+   User Id                 :   500
+   Is Enabled              :   True
+   User Type               :   Administrator
+   Comment                 :   Built-in account for administering the computer/domain
+   Last Logon              :   10/12/2020 12:11:57 PM
+   Logons Count            :   19
+   Password Last Set       :   9/27/2019 6:17:19 AM
+
+   =================================================================================================
+
+   Computer Name           :   STEELMOUNTAIN
+   User Name               :   bill
+   User Id                 :   1001
+   Is Enabled              :   True
+   User Type               :   User
+   Comment                 :
+   Last Logon              :   7/29/2026 9:36:42 AM
+   Logons Count            :   74
+   Password Last Set       :   9/26/2019 11:26:45 PM
+
+   =================================================================================================
+
+   Computer Name           :   STEELMOUNTAIN
+   User Name               :   Guest
+   User Id                 :   501
+   Is Enabled              :   False
+   User Type               :   Guest
+   Comment                 :   Built-in account for guest access to the computer/domain
+   Last Logon              :   1/1/1970 12:00:00 AM
+   Logons Count            :   0
+   Password Last Set       :   1/1/1970 12:00:00 AM
+
+   =================================================================================================
+
+
+???????????? RDP Sessions (T1563.002)
+? Disconnected high-privilege RDP sessions keep reusable tokens inside LSASS. https://book.hacktri
+cks.wiki/en/windows-hardening/windows-local-privilege-escalation/credentials-mgmt/rdp-sessions                                                                                                                                                                                                                              
+    SessID  Session        User                Domain                State          SourceIP          HighPriv
+                                                                                                                                                                                                                                                                                                                            
+    1       Console        bill                STEELMOUNTAIN         Active
+                          No
+
+???????????? Ever logged users (T1033)
+    STEELMOUNTAIN\Administrator
+    STEELMOUNTAIN\bill
+
+???????????? Home folders found (T1083)
+    C:\Users\Administrator
+    C:\Users\All Users
+    C:\Users\bill : bill [Allow: AllAccess]
+    C:\Users\Default
+    C:\Users\Default User
+    C:\Users\Public : Interactive [Allow: WriteData/CreateFiles]
+
+???????????? Looking for AutoLogon credentials (T1552.002)
+    Some AutoLogon credentials were found
+    DefaultUserName               :  bill
+    DefaultPassword               :  PMBAf5KhZAxVhvqb
+
+???????????? Password Policies (T1201)
+? Check for a possible brute-force 
+    Domain: Builtin
+    SID: S-1-5-32
+    MaxPasswordAge: 42.22:47:31.7437440
+    MinPasswordAge: 00:00:00
+    MinPasswordLength: 0
+    PasswordHistoryLength: 0
+    PasswordProperties: 0
+   =================================================================================================
+
+    Domain: STEELMOUNTAIN
+    SID: S-1-5-21-3029548963-3893655183-1231094572
+    MaxPasswordAge: 42.00:00:00
+    MinPasswordAge: 00:00:00
+    MinPasswordLength: 0
+    PasswordHistoryLength: 0
+    PasswordProperties: DOMAIN_PASSWORD_COMPLEX
+   =================================================================================================
+
+
+???????????? Print Logon Sessions (T1033)
+    Method:                       WMI
+    Logon Server:
+    Logon Server Dns Domain:
+    Logon Id:                     257125
+    Logon Time:
+    Logon Type:                   0
+    Start Time:                   12/31/1600 4:00:00 PM
+    Domain:                       STEELMOUNTAIN
+    Authentication Package:
+    Start Time:                   12/31/1600 4:00:00 PM
+    User Name:                    bill
+    User Principal Name:
+    User SID:
+
+   =================================================================================================
+
+
+
+????????????????????????????????????? Processes Information (T1057,T1134.001) ??????
+???????????????????????????????                                                                                                                                                                                                                                                                                             
+
+???????????? Interesting Processes -non Microsoft- (T1057)
+? Check if any interesting processes for memory dump or if you could overwrite some binary running 
+https://book.hacktricks.wiki/en/windows-hardening/windows-local-privilege-escalation/index.html#running-processes                                                                                                                                                                                                           
+    cmd(4004)[C:\Windows\SysWOW64\cmd.exe] -- POwn: bill
+    Command Line: C:\Windows\system32\cmd.exe
+   =================================================================================================                                                                                                                                                                                                                        
+
+    conhost(1408)[C:\Windows\system32\conhost.exe] -- POwn: bill
+    Command Line: \??\C:\Windows\system32\conhost.exe 0x4
+   =================================================================================================
+
+    conhost(2652)[C:\Windows\system32\conhost.exe] -- POwn: bill
+    Command Line: \??\C:\Windows\system32\conhost.exe 0x4
+   =================================================================================================
+
+    wscript(2672)[C:\Windows\SysWOW64\wscript.exe] -- POwn: bill
+    Command Line: "C:\Windows\System32\wscript.exe" //B //NOLOGO %TEMP%\iIFMRlljtZ.vbs
+   =================================================================================================                                                                                                                                                                                                                        
+
+    hfs(2112)[C:\Users\bill\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\hfs.exe] -- PO
+wn: bill
+    Permissions: bill [Allow: AllAccess]
+    Possible DLL Hijacking folder: C:\Users\bill\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Start
+up (bill [Allow: AllAccess])                                                                                                                                                                                                                                                                                                
+    Command Line: "C:\Users\bill\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\hfs.exe"
+   =================================================================================================                                                                                                                                                                                                                        
+
+    winPEASx64(3800)[C:\Users\bill\Desktop\winPEASx64.exe] -- POwn: bill -- isDotNet
+    Permissions: bill [Allow: AllAccess]
+    Possible DLL Hijacking folder: C:\Users\bill\Desktop (bill [Allow: AllAccess])
+    Command Line: "C:\Users\bill\Desktop\winPEASx64.exe"
+   =================================================================================================                                                                                                                                                                                                                        
+
+    explorer(2972)[C:\Windows\Explorer.EXE] -- POwn: bill
+    Command Line: C:\Windows\Explorer.EXE
+   =================================================================================================                                                                                                                                                                                                                        
+
+    taskhostex(2884)[C:\Windows\system32\taskhostex.exe] -- POwn: bill
+    Command Line: taskhostex.exe
+   =================================================================================================                                                                                                                                                                                                                        
+
+    lcVIkBqAlbvLBzs(1064)[C:\Users\bill\AppData\Local\Temp\1\rad7A0FA.tmp\lcVIkBqAlbvLBzs.exe] -- POwn:
+ bill
+    Permissions: bill [Allow: AllAccess]
+    Possible DLL Hijacking folder: C:\Users\bill\AppData\Local\Temp\1\rad7A0FA.tmp (bill [Allow: AllAccess])
+                                                                                                                                                                                                                                                                                                                            
+    Command Line: "C:\Users\bill\AppData\Local\Temp\1\rad7A0FA.tmp\lcVIkBqAlbvLBzs.exe"
+   =================================================================================================                                                                                                                                                                                                                        
+
+
+???????????? Vulnerable Leaked Handlers (T1134.001)
+?  https://book.hacktricks.wiki/en/windows-hardening/windows-local-privilege-escalation/index.html
+#leaked-handlers                                                                                                                                                                                                                                                                                                            
+? Getting Leaked Handlers, it might take some time...
+                   
+Handle: 1204(key)                                                                                                                                                                                                                                                                                                           
+    Handle Owner: Pid is 3800(winPEASx64) with owner: bill
+    Reason: AllAccess
+    Registry: HKLM\software\wow6432node\microsoft\windows\currentversion\explorer\folderdescriptions\{7c5a40
+ef-a0fb-4bfc-874a-c0f2e0b9fa8e}\propertybag
+   =================================================================================================
+
+    Handle: 1332(key)
+    Handle Owner: Pid is 3800(winPEASx64) with owner: bill
+    Reason: AllAccess
+    Registry: HKLM\software\wow6432node\microsoft\windows\currentversion\explorer\folderdescriptions\{fdd39a
+d0-238f-46af-adb4-6c85480369c7}\propertybag
+   =================================================================================================
+
+    Handle: 1656(key)
+    Handle Owner: Pid is 3800(winPEASx64) with owner: bill
+    Reason: AllAccess
+    Registry: HKLM\system\controlset001\control\nls\language groups
+   =================================================================================================
+
+    Handle: 1804(key)
+    Handle Owner: Pid is 3800(winPEASx64) with owner: bill
+    Reason: TakeOwnership
+    Registry: HKLM\system\controlset001\control\nls\sorting\versions
+   =================================================================================================
+
+    Handle: 1808(key)
+    Handle Owner: Pid is 3800(winPEASx64) with owner: bill
+    Reason: TakeOwnership
+    Registry: HKLM\system\controlset001\control\session manager
+   =================================================================================================
+
+    Handle: 1812(key)
+    Handle Owner: Pid is 3800(winPEASx64) with owner: bill
+    Reason: AllAccess
+    Registry: HKLM\software\wow6432node\microsoft\.netframework
+   =================================================================================================
+
+    Handle: 1856(key)
+    Handle Owner: Pid is 3800(winPEASx64) with owner: bill
+    Reason: TakeOwnership
+    Registry: HKLM\system\controlset001\control\networkprovider\hworder
+   =================================================================================================
+
+
+
+????????????????????????????????????? Services Information (T1007,T1543.003,T1574.001,T1574.011,T1
+014,T1068) ?????????????????????????????????????                                                                                                                                                                                                                                                                            
+
+???????????? Interesting Services -non Microsoft- (T1007)
+? Check if you can overwrite some service binary or perform a DLL hijacking, also check for unquoted path
+s https://book.hacktricks.wiki/en/windows-hardening/windows-local-privilege-escalation/index.html#services                                                                                                                                                                                                                  
+    AdvancedSystemCareService9(IObit - Advanced SystemCare Service 9)[C:\Program Files (x86)\IObit\Advanced
+SystemCare\ASCService.exe] - Auto - Running - No quotes and Space detected                                                                                                                                                                                                                                                  
+    File Permissions: bill [Allow: WriteData/CreateFiles]
+    Possible DLL Hijacking in binary folder: C:\Program Files (x86)\IObit\Advanced SystemCare (bill [Allow:
+WriteData/CreateFiles])                                                                                                                                                                                                                                                                                                     
+    Advanced SystemCare Service
+   =================================================================================================                                                                                                                                                                                                                        
+
+    AmazonSSMAgent(Amazon SSM Agent)["C:\Program Files\Amazon\SSM\amazon-ssm-agent.exe"] - Auto - Runnin
+g
+    Amazon SSM Agent
+   =================================================================================================                                                                                                                                                                                                                        
+
+    AWSLiteAgent(Amazon Inc. - AWS Lite Guest Agent)[C:\Program Files\Amazon\XenTools\LiteAgent.exe] - A
+uto - Running - No quotes and Space detected
+    AWS Lite Guest Agent
+   =================================================================================================                                                                                                                                                                                                                        
+
+    Ec2Config(Amazon Web Services, Inc. - Ec2Config)["C:\Program Files\Amazon\Ec2ConfigService\Ec2Config.exe
+"] - Auto - Running - isDotNet                                                                                                                                                                                                                                                                                              
+    Ec2 Configuration Service
+   =================================================================================================                                                                                                                                                                                                                        
+
+    IObitUnSvr(IObit - IObit Uninstaller Service)[C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.e
+xe] - Auto - Stopped - No quotes and Space detected                                                                                                                                                                                                                                                                         
+    File Permissions: bill [Allow: WriteData/CreateFiles]
+    Possible DLL Hijacking in binary folder: C:\Program Files (x86)\IObit\IObit Uninstaller (bill [Allow: Wr
+iteData/CreateFiles])                                                                                                                                                                                                                                                                                                       
+    IObit Uninstaller Service
+   =================================================================================================                                                                                                                                                                                                                        
+
+    LiveUpdateSvc(IObit - LiveUpdate)[C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe] - Auto - R
+unning - No quotes and Space detected
+    File Permissions: bill [Allow: WriteData/CreateFiles]
+    Possible DLL Hijacking in binary folder: C:\Program Files (x86)\IObit\LiveUpdate (bill [Allow: WriteData
+/CreateFiles])                                                                                                                                                                                                                                                                                                              
+    LiveUpdate
+   =================================================================================================                                                                                                                                                                                                                        
+
+    PsShutdownSvc(Systems Internals - PsShutdown)[C:\Windows\PSSDNSVC.EXE] - Manual - Stopped
+   =================================================================================================
+
+
+???????????? Modifiable Services (T1543.003)
+? Check if you can modify any service https://book.hacktricks.wiki/en/windows-hardening/windows-lo
+cal-privilege-escalation/index.html#services                                                                                                                                                                                                                                                                                
+    You cannot modify any service
+
+???????????? Looking if you can modify any service registry (T1574.011)
+? Check if you can modify the registry of a service https://book.hacktricks.wiki/en/windows-harden
+ing/windows-local-privilege-escalation/index.html#services-registry-modify-permissions                                                                                                                                                                                                                                      
+    [-] Looks like you cannot change the registry of any service...
+
+???????????? Checking write permissions in PATH folders (DLL Hijacking) (T1574.001)
+? Check for DLL Hijacking in PATH folders https://book.hacktricks.wiki/en/windows-hardening/window
+s-local-privilege-escalation/index.html#dll-hijacking                                                                                                                                                                                                                                                                       
+    C:\Windows\system32
+    C:\Windows
+    C:\Windows\System32\Wbem
+    C:\Windows\System32\WindowsPowerShell\v1.0\
+
+???????????? OEM privileged utilities & risky components (T1068)
+  [X] Exception: Method not found: '!!0[] System.Array.Empty()'.
+
+???????????? Kernel drivers with weak/legacy signatures (T1014)
+? Legacy cross-signed drivers (pre-July-2015) can still grant kernel execution on modern Windows h
+ttps://research.checkpoint.com/2025/cracking-valleyrat-from-builder-secrets-to-kernel-rootkits/                                                                                                                                                                                                                             
+?   Unable to enumerate kernel services
+
+???????????? KernelQuick / ValleyRAT rootkit indicators (T1014)
+?   No KernelQuick-specific registry indicators were found
+
+
+????????????????????????????????????? .NET SOAP Client Proxies (SOAPwn) (T1559,T1071.001)
+ ?????????????????????????????????????                                                                                                                                                                                                                                                                                      
+
+???????????? Potential SOAPwn / HttpWebClientProtocol abuse surfaces (T1559,T1071.001)
+? Look for .NET services that let attackers control SoapHttpClientProtocol URLs or WSDL imports to coerce
+ NTLM or drop files. https://labs.watchtowr.com/soapwn-pwning-net-framework-applications-through-http-client-pro                                                                                                                                                                                                            
+xies-and-wsdl/                                                                                                                                                                                                                                                                                                              
+Error while enumerating services for SOAP client analysis: Invalid parameter 
+    Not Found
+
+
+????????????????????????????????????? Applications Information (T1518,T1547.001,T1053.005,T1010,T1
+014) ?????????????????????????????????????                                                                                                                                                                                                                                                                                  
+
+???????????? Current Active Window Application (T1010)
+    HFS ~ HTTP File Server 2.3                                                                                Bu
+ild 288                                                                                                                                                                                                                                                                                                                     
+
+???????????? Installed Applications --Via Program Files/Uninstall registry-- (T1518)
+? Check if you can modify installed software https://book.hacktricks.wiki/en/windows-hardening/win
+dows-local-privilege-escalation/index.html#applications                                                                                                                                                                                                                                                                     
+    C:\Program Files\Amazon
+    C:\Program Files\Common Files
+    C:\Program Files\desktop.ini
+    C:\Program Files\Internet Explorer
+    C:\Program Files\Uninstall Information
+    C:\Program Files\Windows Mail
+    C:\Program Files\Windows NT
+    C:\Program Files\WindowsApps
+    C:\Program Files\WindowsPowerShell
+
+
+???????????? Autorun Applications (T1547.001)
+? Check if you can modify other users AutoRuns binaries (Note that is normal that you can modify HKCU reg
+istry and binaries indicated there) https://book.hacktricks.wiki/en/windows-hardening/windows-local-privilege-es                                                                                                                                                                                                            
+calation/privilege-escalation-with-autorun-binaries.html                                                                                                                                                                                                                                                                    
+  [X] Exception: An exception occured while parsing sensitive_files.yaml configuration file: Method not found: '
+!!0[] System.Array.Empty()'.                                                                                                                                                                                                                                                                                                
+  [X] Exception: Method not found: '!!0[] System.Array.Empty()'.
+
+???????????? Scheduled Applications --Non Microsoft-- (T1053.005)
+? Check if you can modify other users scheduled binaries https://book.hacktricks.wiki/en/windows-h
+ardening/windows-local-privilege-escalation/privilege-escalation-with-autorun-binaries.html                                                                                                                                                                                                                                 
+    (STEELMOUNTAIN\Administrator) hfs: C:\Users\bill\Desktop\hfs.exe 
+    Trigger: At system startup
+
+   =================================================================================================
+
+
+???????????? Device Drivers --Non Microsoft-- (T1014)
+? Check 3rd party drivers for known vulnerabilities/rootkits. https://book.hacktricks.wiki/en/wind
+ows-hardening/windows-local-privilege-escalation/index.html#drivers                                                                                                                                                                                                                                                         
+    XENBUS - 8.2.7.58 [Amazon Inc.]: \\.\GLOBALROOT\SystemRoot\System32\drivers\xenbus.sys
+    XEN - 8.2.7.58 [Amazon Inc.]: \\.\GLOBALROOT\SystemRoot\System32\drivers\xen.sys
+    XENFILT - 8.2.7.58 [Amazon Inc.]: \\.\GLOBALROOT\SystemRoot\System32\drivers\xenfilt.sys
+    VIA PCI IDE MINI Driver - 6,0,6000,170 [VIA Technologies, Inc.]: \\.\GLOBALROOT\SystemRoot\System32\driv
+ers\viaide.sys                                                                                                                                                                                                                                                                                                              
+    NVIDIA nForce(TM) RAID Driver - 10.6.0.22 [NVIDIA Corporation]: \\.\GLOBALROOT\SystemRoot\System32\drive
+rs\nvraid.sys                                                                                                                                                                                                                                                                                                               
+    Broadcom NetXtreme II GigE - 7.4.14.0 [Broadcom Corporation]: \\.\GLOBALROOT\SystemRoot\System32\drivers
+\bxvbda.sys                                                                                                                                                                                                                                                                                                                 
+    Broadcom NetXtreme II 10 GigE - 7.4.33.1 [Broadcom Corporation]: \\.\GLOBALROOT\SystemRoot\System32\driv
+ers\evbda.sys                                                                                                                                                                                                                                                                                                               
+    Intel Matrix Storage Manager driver - 8.6.2.1019 [Intel Corporation]: \\.\GLOBALROOT\SystemRoot\System32
+\drivers\iaStorV.sys                                                                                                                                                                                                                                                                                                        
+    Adaptec RAID Controller - 7.2.0.30261 [PMC-Sierra, Inc.]: \\.\GLOBALROOT\SystemRoot\System32\drivers\arc
+sas.sys                                                                                                                                                                                                                                                                                                                     
+    NVIDIA nForce(TM) SATA Driver - 10.6.0.22 [NVIDIA Corporation]: \\.\GLOBALROOT\SystemRoot\System32\drive
+rs\nvstor.sys                                                                                                                                                                                                                                                                                                               
+    LSI Fusion-MPT SAS Driver (StorPort) - 1.34.03.82 [LSI Corporation]: \\.\GLOBALROOT\SystemRoot\System32\
+drivers\lsi_sas.sys                                                                                                                                                                                                                                                                                                         
+    LSI SAS Gen2 Driver (StorPort) - 2.00.60.82 [LSI Corporation]: \\.\GLOBALROOT\SystemRoot\System32\driver
+s\lsi_sas2.sys                                                                                                                                                                                                                                                                                                              
+    LSI SAS Gen3 Driver (StorPort) - 2.50.65.01 [LSI Corporation]: \\.\GLOBALROOT\SystemRoot\System32\driver
+s\lsi_sas3.sys                                                                                                                                                                                                                                                                                                              
+    LSI 3ware RAID Controller - WindowsBlue [LSI]: \\.\GLOBALROOT\SystemRoot\System32\drivers\3ware.sys
+    LSI SSS PCIe/Flash Driver (StorPort) - 2.10.61.81 [LSI Corporation]: \\.\GLOBALROOT\SystemRoot\System32\
+drivers\lsi_sss.sys                                                                                                                                                                                                                                                                                                         
+    Marvell Flash Controller -  1.0.5.1015  [Marvell Semiconductor, Inc.]: \\.\GLOBALROOT\SystemRoot\System3
+2\drivers\mvumis.sys                                                                                                                                                                                                                                                                                                        
+    VIA StorX RAID Controller Driver - 8.0.9200.8110 [VIA Corporation]: \\.\GLOBALROOT\SystemRoot\System32\d
+rivers\vstxraid.sys                                                                                                                                                                                                                                                                                                         
+    MEGASAS RAID Controller Driver for Windows - 6.600.21.08 [LSI Corporation]: \\.\GLOBALROOT\SystemRoot\Sy
+stem32\drivers\megasas.sys                                                                                                                                                                                                                                                                                                  
+    MegaRAID Software RAID - 15.02.2013.0129 [LSI Corporation, Inc.]: \\.\GLOBALROOT\SystemRoot\System32\dri
+vers\megasr.sys                                                                                                                                                                                                                                                                                                             
+    Intel Rapid Storage Technology driver (inbox) - 12.0.1.1018 [Intel Corporation]: \\.\GLOBALROOT\SystemRo
+ot\System32\drivers\iaStorAV.sys                                                                                                                                                                                                                                                                                            
+    AHCI 1.3 Device Driver - 1.1.4.14 [Advanced Micro Devices]: \\.\GLOBALROOT\SystemRoot\System32\drivers\a
+mdsata.sys                                                                                                                                                                                                                                                                                                                  
+    Storage Filter Driver - 1.1.4.14 [Advanced Micro Devices]: \\.\GLOBALROOT\SystemRoot\System32\drivers\am
+dxata.sys                                                                                                                                                                                                                                                                                                                   
+    AMD Technology AHCI Compatible Controller - 3.7.1540.43 [AMD Technologies Inc.]: \\.\GLOBALROOT\SystemRo
+ot\System32\drivers\amdsbs.sys                                                                                                                                                                                                                                                                                              
+    VIA RAID driver - 7.0.9200,6320 [VIA Technologies Inc.,Ltd]: \\.\GLOBALROOT\SystemRoot\System32\drivers\
+vsmraid.sys                                                                                                                                                                                                                                                                                                                 
+    Microsoftr Windowsr Operating System - 2.60.01 [Silicon Integrated Systems Corp.]: \\.\GLOBALROOT\System
+Root\System32\drivers\SiSRaid2.sys                                                                                                                                                                                                                                                                                          
+    Microsoftr Windowsr Operating System - 6.1.6918.0 [Silicon Integrated Systems]: \\.\GLOBALROOT\SystemRoo
+t\System32\drivers\sisraid4.sys                                                                                                                                                                                                                                                                                             
+     Promiser SuperTrak EX Series -  5.1.0000.10 [Promise Technology, Inc.]: \\.\GLOBALROOT\SystemRoot\Syste
+m32\drivers\stexstor.sys                                                                                                                                                                                                                                                                                                    
+    QLogic Fibre Channel Stor Miniport Inbox Driver - 9.1.11.3 [QLogic Corporation]: \\.\GLOBALROOT\SystemRo
+ot\System32\drivers\ql2300i.sys                                                                                                                                                                                                                                                                                             
+    QLogic FCoE Stor Miniport Inbox Driver - 9.1.11.3 [QLogic Corporation]: \\.\GLOBALROOT\SystemRoot\System
+32\drivers\qlfcoei.sys                                                                                                                                                                                                                                                                                                      
+    QLA40XX iSCSI Host Bus Adapter - 2.1.5.0 (STOREx wx64) [QLogic Corporation]: \\.\GLOBALROOT\SystemRoot\S
+ystem32\drivers\ql40xx2i.sys                                                                                                                                                                                                                                                                                                
+    Emulex WS2K12 Storport Miniport Driver x64 - 2.74.214.004 05/23/2013 WS2K12 64 bit x64 [Emulex]: \\.\GLO
+BALROOT\SystemRoot\System32\drivers\elxstor.sys                                                                                                                                                                                                                                                                             
+    Emulex WS2K12 Storport Miniport Driver x64 - 2.74.214.004 05/23/2013 WS2K12 64 bit x64 [Emulex]: \\.\GLO
+BALROOT\SystemRoot\System32\drivers\elxfcoe.sys                                                                                                                                                                                                                                                                             
+    Brocade FC/FCoE HBA Stor Miniport Driver - 3.2.2.5 [Brocade Communications Systems, Inc.]: \\.\GLOBALROO
+T\SystemRoot\System32\drivers\bfadi.sys                                                                                                                                                                                                                                                                                     
+    Brocade FC/FCoE HBA Stor Miniport Driver - 3.2.2.5 [Brocade Communications Systems, Inc.]: \\.\GLOBALROO
+T\SystemRoot\System32\drivers\bfadfcoei.sys                                                                                                                                                                                                                                                                                 
+    XENVBD - 8.3.1.56 [Amazon Inc.]: \\.\GLOBALROOT\SystemRoot\System32\drivers\xenvbd.sys
+    XENCRSH - 8.3.1.56 [Amazon Inc.]: \\.\GLOBALROOT\SystemRoot\System32\drivers\xencrsh.sys
+    Amazon NVMe Storage Driver - V1.3.1 [Amazon]: \\.\GLOBALROOT\SystemRoot\System32\drivers\AWSNVMe.sys
+    PMC-Sierra HBA Controller - 1.0.0.0254 [PMC-Sierra]: \\.\GLOBALROOT\SystemRoot\System32\drivers\ADP80XX.
+SYS                                                                                                                                                                                                                                                                                                                         
+    Smart Array SAS/SATA Controller Media Driver - 8.0.4.0 Build 1 Media Driver (x86-64) [Hewlett-Packard Company]: 
+\\.\GLOBALROOT\SystemRoot\System32\drivers\HpSAMD.sys
+    OpenFabrics Windows - 6.3.9391.6 [Mellanox]: \\.\GLOBALROOT\SystemRoot\System32\drivers\mlx4_bus.sys
+    OpenFabrics Windows - 6.3.9391.6 [Mellanox]: \\.\GLOBALROOT\SystemRoot\System32\drivers\ibbus.sys
+    OpenFabrics Windows - 6.3.9391.6 [Mellanox]: \\.\GLOBALROOT\SystemRoot\System32\drivers\ndfltr.sys
+    OpenFabrics Windows - 6.3.9391.6 [Mellanox]: \\.\GLOBALROOT\SystemRoot\System32\drivers\winverbs.sys
+    OpenFabrics Windows - 6.3.9391.6 [Mellanox]: \\.\GLOBALROOT\SystemRoot\System32\drivers\winmad.sys
+    Broadcom iSCSI offload driver - 7.4.4.0 [Broadcom Corporation]: \\.\GLOBALROOT\SystemRoot\System32\drive
+rs\bxois.sys                                                                                                                                                                                                                                                                                                                
+    Broadcom FCoE offload driver - 7.4.6.0 [Broadcom Corporation]: \\.\GLOBALROOT\SystemRoot\System32\driver
+s\bxfcoe.sys                                                                                                                                                                                                                                                                                                                
+    XENVIF - 8.2.8.27 [Amazon Inc.]: \\.\GLOBALROOT\SystemRoot\System32\drivers\xenvif.sys
+    XENIFACE - 8.2.5.39 [Amazon Inc.]: \\.\GLOBALROOT\SystemRoot\System32\drivers\xeniface.sys
+    XENNET - 8.2.5.32 [Amazon Inc.]: \\.\GLOBALROOT\SystemRoot\system32\DRIVERS\xennet.sys
+    Macrovision SECURITY Driver - SECURITY Driver 4.03.086 2006/09/13 [Macrovision Corporation, Macrovision Europe Limi
+ted, and Macrovision Japan and Asia K.K.]: \\.\GLOBALROOT\SystemRoot\System32\Drivers\secdrv.SYS
+
+
+????????????????????????????????????? Network Information (T1016,T1049,T1135,T1046,T1018,T1090)
+ ?????????????????????????????????????                                                                                                                                                                                                                                                                                      
+
+???????????? Network Shares (T1135)
+    ADMIN$ (Path: C:\Windows)
+    C$ (Path: C:\)
+    IPC$ (Path: )
+
+???????????? Enumerate Network Mapped Drives (WMI) (T1135)
+
+???????????? Host File (T1016)
+
+???????????? Network Ifaces and known hosts (T1016,T1018)
+? The masks are only for the IPv4 addresses 
+  [X] Exception: The requested protocol has not been configured into the system, or no implementation for it exi
+sts                                                                                                                                                                                                                                                                                                                         
+    Ethernet 2[02:04:57:03:6B:45]: 10.66.173.131, fe80::b935:24bf:408a:74cc%14 / 255.255.192.0
+        Gateways: 10.66.128.1
+        DNSs: 10.66.0.2
+    Loopback Pseudo-Interface 1[]: 127.0.0.1, ::1 / 255.0.0.0
+        DNSs: fec0:0:0:ffff::1%1, fec0:0:0:ffff::2%1, fec0:0:0:ffff::3%1
+
+???????????? Current TCP Listening Ports (T1049)
+? Check for services restricted from the outside 
+  Enumerating IPv4 connections
+                                                                                                                                                                                                                                                                                                                            
+  Protocol   Local Address         Local Port    Remote Address        Remote Port     State             Process ID
+  Process Name
+
+  TCP        0.0.0.0               80            0.0.0.0               0               Listening         4
+  System
+  TCP        0.0.0.0               135           0.0.0.0               0               Listening         732
+  svchost
+  TCP        0.0.0.0               445           0.0.0.0               0               Listening         4
+  System
+  TCP        0.0.0.0               3389          0.0.0.0               0               Listening         2316
+  svchost
+  TCP        0.0.0.0               5985          0.0.0.0               0               Listening         4
+  System
+  TCP        0.0.0.0               8080          0.0.0.0               0               Listening         2112
+  C:\Users\bill\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\hfs.exe
+  TCP        0.0.0.0               47001         0.0.0.0               0               Listening         4
+  System
+  TCP        0.0.0.0               49152         0.0.0.0               0               Listening         572
+  wininit
+  TCP        0.0.0.0               49153         0.0.0.0               0               Listening         648
+  lsass
+  TCP        0.0.0.0               49154         0.0.0.0               0               Listening         960
+  svchost
+  TCP        0.0.0.0               49155         0.0.0.0               0               Listening         1000
+  svchost
+  TCP        0.0.0.0               49156         0.0.0.0               0               Listening         1220
+  spoolsv
+  TCP        0.0.0.0               49191         0.0.0.0               0               Listening         640
+  services
+  TCP        0.0.0.0               49192         0.0.0.0               0               Listening         2344
+  svchost
+  TCP        10.66.173.131         139           0.0.0.0               0               Listening         4
+  System
+  TCP        10.66.173.131         49217         10.66.185.90          443             Established       1272
+  amazon-ssm-agent
+  TCP        10.66.173.131         49390         192.168.150.117       4444            Established       1064
+  C:\Users\bill\AppData\Local\Temp\1\rad7A0FA.tmp\lcVIkBqAlbvLBzs.exe
+  TCP        10.66.173.131         49460         10.66.185.148         443             Established       1272
+  amazon-ssm-agent
+
+  Enumerating IPv6 connections
+                                                                                                                                                                                                                                                                                                                            
+  Protocol   Local Address                               Local Port    Remote Address                              Remo
+te Port     State             Process ID      Process Name
+
+  TCP        [::]                                        80            
+[::]                                        0               Listening         4               System
+  TCP        [::]                                        135           
+[::]                                        0               Listening         732             svchost
+  TCP        [::]                                        445           
+[::]                                        0               Listening         4               System
+  TCP        [::]                                        3389          
+[::]                                        0               Listening         2316            svchost
+  TCP        [::]                                        5985          
+[::]                                        0               Listening         4               System
+  TCP        [::]                                        47001         
+[::]                                        0               Listening         4               System
+  TCP        [::]                                        49152         
+[::]                                        0               Listening         572             wininit
+  TCP        [::]                                        49153         
+[::]                                        0               Listening         648             lsass
+  TCP        [::]                                        49154         
+[::]                                        0               Listening         960             svchost
+  TCP        [::]                                        49155         
+[::]                                        0               Listening         1000            svchost
+  TCP        [::]                                        49156         
+[::]                                        0               Listening         1220            spoolsv
+  TCP        [::]                                        49191         
+[::]                                        0               Listening         640             services
+  TCP        [::]                                        49192         
+[::]                                        0               Listening         2344            svchost
+
+???????????? Current UDP Listening Ports (T1049)
+? Check for services restricted from the outside 
+  Enumerating IPv4 connections
+                                                                                                                                                                                                                                                                                                                            
+  Protocol   Local Address         Local Port    Remote Address:Remote Port     Process ID        Process Name
+
+  UDP        0.0.0.0               123           *:*                            440               svchost
+  UDP        0.0.0.0               500           *:*                            1000              svchost
+  UDP        0.0.0.0               3389          *:*                            2316              svchost
+  UDP        0.0.0.0               4500          *:*                            1000              svchost
+  UDP        0.0.0.0               5355          *:*                            632               svchost
+  UDP        10.66.173.131         137           *:*                            4                 System
+  UDP        10.66.173.131         138           *:*                            4                 System
+
+  Enumerating IPv6 connections
+                                                                                                                                                                                                                                                                                                                            
+  Protocol   Local Address                               Local Port    Remote Address:Remote Port     Process ID
+ Process Name
+
+  UDP        [::]                                        123           *:*                            44
+0               svchost
+  UDP        [::]                                        500           *:*                            10
+00              svchost
+  UDP        [::]                                        3389          *:*                            23
+16              svchost
+  UDP        [::]                                        4500          *:*                            10
+00              svchost
+  UDP        [::]                                        5355          *:*                            63
+2               svchost
+
+???????????? Firewall Rules (T1016)
+? Showing only DENY rules (too many ALLOW rules always) 
+    Current Profiles: PUBLIC
+    FirewallEnabled (Domain):    True
+    FirewallEnabled (Private):    False
+    FirewallEnabled (Public):    False
+    DENY rules:
+
+???????????? DNS cached --limit 70-- (T1016)
+    Entry                                 Name                                  Data
+    win8.ipv6.microsoft.com
+    ...messages.us-east-1.amazonaws.com   ...messages.us-east-1.amazonaws.com   10.66.185.148
+    wpad
+
+???????????? Enumerating Internet settings, zone and proxy configuration (T1090)
+  General Settings
+  Hive        Key                                       Value
+  HKCU        User Agent                                Mozilla/4.0 (compatible; MSIE 8.0; Win32)
+  HKCU        IE5_UA_Backup_Flag                        5.0
+  HKCU        ZonesSecurityUpgrade                      System.Byte[]
+  HKCU        EmailName                                 User@
+  HKCU        AutoConfigProxy                           wininet.dll
+  HKCU        MimeExclusionListForCache                 multipart/mixed multipart/x-mixed-replace multipart/x-byterange
+s
+  HKCU        WarnOnPost                                System.Byte[]
+  HKCU        UseSchannelDirectly                       System.Byte[]
+  HKCU        EnableHttp1_1                             1
+  HKCU        UrlEncoding                               0
+  HKCU        SecureProtocols                           2720
+  HKCU        PrivacyAdvanced                           0
+  HKCU        DisableCachingOfSSLPages                  1
+  HKCU        WarnonZoneCrossing                        1
+  HKCU        CertificateRevocation                     1
+  HKCU        EnableNegotiate                           1
+  HKCU        MigrateProxy                              1
+  HKCU        ProxyEnable                               0
+  HKLM        CodeBaseSearchPath                        CODEBASE
+  HKLM        EnablePunycode                            1
+  HKLM        WarnOnIntranet                            1
+  HKLM        MinorVersion                              0
+  HKLM        ActiveXCache                              C:\Windows\Downloaded Program Files
+
+  Zone Maps                                                                                                                                                                                                                                                                                                                 
+  No URLs configured
+
+  Zone Auth Settings                                                                                                                                                                                                                                                                                                        
+  No Zone Auth Settings
+
+???????????? Internet Connectivity (T1016)
+? Checking if internet access is possible via different methods 
+  [X] Exception: The type initializer for 'winPEAS.Info.NetworkInfo.InternetConnectivity' threw an exception.
+                                                                                                                                                                                                                                                                                                                            
+
+???????????? Hostname Resolution (T1016)
+? Checking if the hostname can be resolved externally 
+  [X] Exception:     Error during online HackTricks check: Could not load file or assembly 'System.Net.Http, Ver
+sion=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' or one of its dependencies. The system cannot find the                                                                                                                                                                                                      
+file specified.                                                                                                                                                                                                                                                                                                             
+
+
+????????????????????????????????????? Active Directory Quick Checks (T1018,T1087.002,T1558.003,T14
+84.001,T1649,T1003) ?????????????????????????????????????                                                                                                                                                                                                                                                                   
+
+???????????? gMSA readable managed passwords (T1003)
+? Look for Group Managed Service Accounts you can read (msDS-ManagedPassword) https://book.hacktri
+cks.wiki/en/windows-hardening/active-directory-methodology/gmsa.html                                                                                                                                                                                                                                                        
+  [-] Host is not domain-joined. Skipping.
+
+???????????? Kerberoasting / service ticket risks (T1558.003)
+? Enumerate weak SPN accounts and legacy Kerberos crypto https://book.hacktricks.wiki/en/windows-h
+ardening/active-directory-methodology/kerberoast.html                                                                                                                                                                                                                                                                       
+  [-] Host is not domain-joined. Skipping.
+ERROR: ./winPEASx64.exe :
+ERROR: At line:1 char:1
+ERROR: + ./winPEASx64.exe
+ERROR: + ~~~~~~~~~~~~~~~~
+ERROR:     + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+ERROR:     + FullyQualifiedErrorId : NativeCommandError
+ERROR: 
+ERROR: Unhandled Exception:
+ERROR: System.TypeLoadException: Could not load type 'System.ValueTuple`2' from assembly 'mscorlib, Version=4.0.0.0,
+ERROR: Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+ERROR:    at winPEAS.Checks.ActiveDirectoryInfo.PrintAdObjectControlPaths()
+ERROR:    at winPEAS.Helpers.CheckRunner.Run(Action action, Boolean isDebug, String description)
+ERROR:    at System.Collections.Generic.List`1.ForEach(Action`1 action)
+ERROR:    at winPEAS.Checks.Checks.RunChecks(Boolean isAllChecks, Boolean wait)
+ERROR:    at winPEAS.Checks.Checks.<>c__DisplayClass35_0.<Run>b__1()
+ERROR:    at winPEAS.Helpers.CheckRunner.Run(Action action, Boolean isDebug, String description)
+ERROR:    at winPEAS.Checks.Checks.Run(String[] args)
+ERROR:    at winPEAS.Program.Main(String[] args)
+ERROR: 
+ERROR: 
