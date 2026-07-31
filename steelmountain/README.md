@@ -149,18 +149,3 @@ Replacing the Advanced SystemCare9 file with the msfvenom file allowed me to sta
 ```
 
 ---
-
-## 5. Remediation
-
-_Write this section as if reporting to the box owner. It's the difference
-between "I did a CTF" and "I understand security." Two or three concrete fixes:_
-
-- **Finding:** _e.g. anonymous SMB read access_
-  **Fix:** _disable guest access; require authentication on all shares_
-- **Finding:**
-  **Fix:**
-
----
-
-## 6. Exploit-DB
-Rejetto HTTP File Server (HFS) 2.3.x - Remote Command Execution (2) CVE: 2014-6287
