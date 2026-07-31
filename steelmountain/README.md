@@ -88,22 +88,37 @@ HTTP File server Port 8080
 
 
 ### Service: HTTP (port 8080)
+
+```bash
 Findings: Rejetto HTTP file server
+---
 
 ## 3. Initial foothold
+
+**Vulnerability:**
 Rejetto HTTP File Server (HFS) - Remote Command Execution (Metasploit) CVE: 2014-6287
 
 **How I exploited it:**
-Metasploit has an exploit for this specific file server which creates a shell in the user "bill's account
-bash:
+
+```bash
 msf exploit(windows/http/rejetto_hfs_exec) 
+```
+
 **user.txt**
+
+```
 b04763b6fcf51fcd7c13abc7db4fd365
+```
+
+---
 
 ## 4. Privilege escalation
 
 ### Enumeration
-./PowerUp.ps1
+
+```bash
+# on the target
+./PowerUp.ps1```
 **What I Found:**
 ServiceName                     : AdvancedSystemCareService9
 Path                            : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
@@ -129,4 +144,23 @@ Hosted the file from a webserver to download into the powershell directory area
 Replacing the Advanced SystemCare9 file with the msfvenom file allowed me to start a reverse shell with Administrator privileges
 **root.txt**
 
+```
 9af5f314f57607c00fd09803a587db80
+```
+
+---
+
+## 5. Remediation
+
+_Write this section as if reporting to the box owner. It's the difference
+between "I did a CTF" and "I understand security." Two or three concrete fixes:_
+
+- **Finding:** _e.g. anonymous SMB read access_
+  **Fix:** _disable guest access; require authentication on all shares_
+- **Finding:**
+  **Fix:**
+
+---
+
+## 6. Exploit-DB
+Rejetto HTTP File Server (HFS) 2.3.x - Remote Command Execution (2) CVE: 2014-6287
