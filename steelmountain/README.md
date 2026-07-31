@@ -103,9 +103,6 @@ b04763b6fcf51fcd7c13abc7db4fd365
 ## 4. Privilege escalation
 
 ### Enumeration
-
-bash:
-# on the target
 ./PowerUp.ps1
 **What I Found:**
 ServiceName                     : AdvancedSystemCareService9
